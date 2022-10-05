@@ -13,6 +13,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.grupo10.app.rents.service.QuadbikeService;
+import java.util.List;
+import java.util.Optional;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
  *
@@ -29,10 +36,31 @@ public class QuadbikeController {
     public Iterable<Quadbike> get() {
         return service.get();
     }
+    
+    @GetMapping("/{id}")
+    public Optional<Quadbike> get(@PathVariable("id") Integer id) {
+        return service.get(id);
+    }
+    
+    @GetMapping("/reports/{id}")
+    public List<Quadbike> getReport(@PathVariable("id") Integer id) {
+        return service.getReport();
+    }
 
     @PostMapping("/save")
-    public String createQuadbike(@RequestBody Quadbike request) {
-        return service.create(request);
+    @ResponseStatus(HttpStatus.CREATED)
+    public void create(@RequestBody Quadbike request) {
+        service.create(request);
+    }
+    
+    @PutMapping("/update")
+    public Quadbike update(@RequestBody Quadbike request) {
+        return service.update(request);
+    }
+    
+    @DeleteMapping("/{id}")
+    public Boolean delete(@PathVariable("id") Integer id) {
+        return service.delete(id);
     }
 
 }
