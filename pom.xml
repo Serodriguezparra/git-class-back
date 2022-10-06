@@ -8,7 +8,7 @@
 		<version>2.7.3</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.grupo10</groupId>
+	<groupId>com.grupo13</groupId>
 	<artifactId>app-rents</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>app-rents</name>
@@ -33,29 +33,38 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-                <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
-                <dependency>
-                    <groupId>mysql</groupId>
-                    <artifactId>mysql-connector-java</artifactId>
-                    <version>8.0.30</version>
-                </dependency>
-                <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
-                <dependency>
-                    <groupId>org.projectlombok</groupId>
-                    <artifactId>lombok</artifactId>
-                    <version>1.18.24</version>
-                    <scope>provided</scope>
-                </dependency>                
-                <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-jpa -->
-                <dependency>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-data-jpa</artifactId>
-                    <version>2.7.4</version>
-                </dependency>
+	
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-data-jpa</artifactId>
+    </dependency>
+
+	<dependency>
+		<groupId>mysql</groupId>
+		<artifactId>mysql-connector-java</artifactId>
+		<version>8.0.30</version>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/io.mateu/lombok -->
+	<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+	<dependency>
+		<groupId>org.projectlombok</groupId>
+		<artifactId>lombok</artifactId>
+		<version>1.18.24</version>
+		<scope>provided</scope>
+	</dependency>
+
+	<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-jpa -->
+	<dependency>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-data-jpa</artifactId>
+		<version>2.7.4</version>
+	</dependency>
+ </dependencies>
+	<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+	
 
 
 
-	</dependencies>
 
 	<build>
 		<plugins>
