@@ -1,6 +1,8 @@
 package com.grupo13.app.rents.service;
 
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +32,46 @@ public class ClientService {
             return "falta el nombre";
         }
 
+    }
+
+    public Client update(Client client){
+        if(client.getIdClient()!=null){
+            Optional<Client> e= repository.findById(client.getIdClient());
+            if(!e.isEmpty()){
+                if(client.getName()!=null){
+                    e.get().setName(client.getName());
+                }
+                if(client.getEmail()!=null){
+                    e.get().setEmail(client.getEmail());
+                }
+                if(client.getPassword()!=null){
+                    e.get().setPassword(client.getPassword());
+                }
+                repository.save(e.get());
+                return e.get();
+            }else{
+                return client;
+            }
+        }else{
+            return client;
+        }
+    }
+
+    /*public Client update(Client client){
+        Client clientToUpdate = new Client();
+        if(repository.existsById(client.getIdClient())){ // si existe
+            clientToUpdate = client;
+            repository.save(clientToUpdate);
+        }
+        return clientToUpdate;
+    }*/
+
+    
+
+    public Boolean delete(Integer id){
+        repository.deleteById(id);
+        Boolean delete = true;
+        return delete;
     }
 
     /*   @Query("SELECT c.year, COUNT(c.year) from Quadbike AS c group by c.year order by COUNT(c.year) DESC")

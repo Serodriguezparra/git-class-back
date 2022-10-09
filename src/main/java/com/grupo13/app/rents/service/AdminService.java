@@ -6,25 +6,25 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.grupo13.app.rents.entities.Score;
+import com.grupo13.app.rents.entities.Admin;
+import com.grupo13.app.rents.interfaces.IAdminRepository;
 import com.grupo13.app.rents.interfaces.IReservationRepository;
-import com.grupo13.app.rents.interfaces.IScoreRepository;
 
 @Service
-public class ScoreService {
+public class AdminService {
     @Autowired
-    IScoreRepository repository;
+    IAdminRepository repository;
     @Autowired
     IReservationRepository reservationRepository;
 
-    public Iterable<Score> get(){
-        Iterable<Score> response = repository.findAll();
+    public Iterable<Admin> get(){
+        Iterable<Admin> response = repository.findAll();
 
         return response;
     }
 
-    public String create(Score request){
-        if(request.getMessageText()!=null){
+    public String create(Admin request){
+        if(request.getName()!=null){
             repository.save(request);
             return "Created ...";
             
@@ -34,26 +34,26 @@ public class ScoreService {
         
     }
 
-    public Score update(Score score){
-        if(score.getIdScore()!=null){
-            Optional<Score> e= repository.findById(score.getIdScore());
+    public Admin update(Admin admin){
+        if(admin.getIdClient()!=null){
+            Optional<Admin> e= repository.findById(admin.getIdClient());
             if(!e.isEmpty()){
-                if(score.getMessageText()!=null){
-                    e.get().setMessageText(score.getMessageText());
+                if(admin.getName()!=null){
+                    e.get().setName(admin.getName());
                 }
-                if(score.getStars()!=null){
-                    e.get().setStars(score.getStars());
+                if(admin.getEmail()!=null){
+                    e.get().setEmail(admin.getEmail());
                 }
-                if(score.getReservation()!=null){
-                    e.get().setReservation(score.getReservation());
+                if(admin.getPassword()!=null){
+                    e.get().setPassword(admin.getPassword());
                 }
                 repository.save(e.get());
                 return e.get();
             }else{
-                return score;
+                return admin;
             }
         }else{
-            return score;
+            return admin;
         }
     }
 

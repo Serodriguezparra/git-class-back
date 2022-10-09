@@ -12,6 +12,7 @@ import com.grupo13.app.rents.service.QuadbikeService;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -24,6 +25,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 @RestController
 @RequestMapping("/api/Quadbike")
+@CrossOrigin(origins = "*")
+//@CrossOrigin(origins = "http://localhost:8080")
 public class QuadbikeController {
     
     @Autowired
@@ -60,16 +63,26 @@ public class QuadbikeController {
         service.create(request);
     }
 
-    
     @PutMapping("/update")
-    public Quadbike update(@RequestBody Quadbike request){
+    @ResponseStatus(HttpStatus.CREATED)
+    public void update(@RequestBody Quadbike request){
  
-       return service.update(request);
+       service.update(request);
     }
 
+  /* //Tutoria
+    @PutMapping("/update")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public Quadbike update(@RequestBody Quadbike quadbike){
+        return service.update(quadbike);
+    } */ 
+
+
+
     @DeleteMapping("/{id}")
-    public Boolean delete(@PathVariable("id") Integer id){
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable("id") Integer id){
  
-       return service.delete(id);
+       service.delete(id);
     }
 }

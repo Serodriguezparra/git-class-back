@@ -15,7 +15,7 @@ import com.grupo13.app.rents.interfaces.IQuadbikeRepository;
 @Service
 public class MessageService {
     @Autowired
-    IMessageRepository messageRepository;
+    IMessageRepository repository;
 
     @Autowired
     IClientRepository clientRepository;
@@ -25,7 +25,7 @@ public class MessageService {
 
     public Iterable<Message> get(){
 
-        Iterable<Message> response = messageRepository.findAll();
+        Iterable<Message> response = repository.findAll();
 
         return response;
     }
@@ -40,13 +40,51 @@ public class MessageService {
             request.setClient(cl.get());
         }
         if(request.getMessageText()!=null){
-           messageRepository.save(request);
+           repository.save(request);
             return "Created ...";
             
         }else{
             return "Falta el nombre";
         }
         
+    }
+
+    public Message update(Message message){
+        if(message.getIdMessage()!=null){
+            Optional<Message> e= repository.findById(message.getIdMessage());
+            if(!e.isEmpty()){
+                if(message.getMessageText()!=null){
+                    e.get().setMessageText(message.getMessageText());
+                }
+                if(message.getQuadbike()!=null){
+                    e.get().setQuadbike(message.getQuadbike());
+                }
+                if(message.getClient()!=null){
+                    e.get().setClient(message.getClient());
+                }
+                repository.save(e.get());
+                return e.get();
+            }else{
+                return message;
+            }
+        }else{
+            return message;
+        }
+    }
+
+  /*  public Message update(Message message){
+        Message messageToUpdate = new Message();
+        if(repository.existsById(message.getIdMessage())){ // si existe
+            messageToUpdate = message;
+            repository.save(messageToUpdate);
+        }
+        return messageToUpdate;
+    }*/
+
+    public Boolean delete(Integer id){
+        repository.deleteById(id);
+        Boolean delete = true;
+        return delete;
     }
 
      /*   @PostMapping("/save")

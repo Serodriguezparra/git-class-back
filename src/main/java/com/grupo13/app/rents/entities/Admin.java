@@ -1,5 +1,7 @@
 package com.grupo13.app.rents.entities;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,13 +11,15 @@ import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Table(name="tb_admin")
 @Getter @Setter
 @AllArgsConstructor
-public class Admin {
+@NoArgsConstructor
+public class Admin implements Serializable{
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

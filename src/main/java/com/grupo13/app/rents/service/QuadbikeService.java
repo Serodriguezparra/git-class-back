@@ -46,13 +46,45 @@ public class QuadbikeService {
     }
 
     public Quadbike update(Quadbike quadbike){
+        if(quadbike.getId()!=null){
+            Optional<Quadbike> e= repository.findById(quadbike.getId());
+            if(!e.isEmpty()){
+                if(quadbike.getName()!=null){
+                    e.get().setName(quadbike.getName());
+                }
+                if(quadbike.getBrand()!=null){
+                    e.get().setBrand(quadbike.getBrand());
+                }
+                if(quadbike.getDescription()!=null){
+                    e.get().setDescription(quadbike.getDescription());
+                }
+                if(quadbike.getYear()!=null){
+                    e.get().setYear(quadbike.getYear());
+                }
+                if(quadbike.getCategory()!=null){
+                    e.get().setCategory(quadbike.getCategory());
+                }
+                repository.save(e.get());
+                return e.get();
+            }else{
+                return quadbike;
+            }
+        }else{
+            return quadbike;
+        }
+    }
+
+
+  
+    /*  public Quadbike update(Quadbike quadbike){
         Quadbike quadbikeToUpdate = new Quadbike();
+        
         if(repository.existsById(quadbike.getId())){ // si existe
             quadbikeToUpdate = quadbike;
             repository.save(quadbikeToUpdate);
         }
         return quadbikeToUpdate;
-    }
+    }*/
 
     public Boolean delete(Integer id){
         repository.deleteById(id);
